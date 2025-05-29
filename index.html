@@ -1,0 +1,539 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobRinger Clone - Modern Redesign</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0b66c3;
+      --background: #f4f6f8;
+      --text: #1a1a1a;
+      --secondary: #ffffff;
+      --accent: #eff6ff;
+      --border: #d1d5db;
+      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--secondary);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    header h1 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+      width: 100%;
+      animation: slideDown 0.3s ease-in-out forwards;
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    .mobile-nav.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes slideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      background: var(--accent);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero .cta {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .hero .cta:hover {
+      background: #084b9a;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem auto;
+      max-width: 1000px;
+      padding: 0 1rem;
+    }
+
+    .filters input,
+    .filters select {
+      padding: 0.6rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 220px;
+    }
+
+    .jobs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .job-card {
+      background: var(--secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s;
+    }
+
+    .job-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .job-card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .job-card p {
+      margin-bottom: 0.5rem;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .job-card .apply {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    footer {
+      background: var(--secondary);
+      text-align: center;
+      padding: 2rem 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>JobRinger</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav>
+      <a href="#">Jobs</a>
+      <a href="#">Companies</a>
+      <a href="#">Post a Job</a>
+      <a href="#">Login</a>
+    </nav>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#">Jobs</a>
+      <a href="#">Companies</a>
+      <a href="#">Post a Job</a>
+      <a href="#">Login</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2>Discover Your Next Opportunity</h2>
+    <p>Search millions of job listings from top employers and find a career path that fits your life and ambitions.</p>
+    <button class="cta">Start Searching</button>
+  </section>
+
+  <section class="filters">
+    <input type="text" placeholder="Job title or keywords">
+    <select>
+      <option>Location</option>
+      <option>Remote</option>
+      <option>New York</option>
+      <option>California</option>
+    </select>
+    <select>
+      <option>Category</option>
+      <option>Engineering</option>
+      <option>Marketing</option>
+      <option>Finance</option>
+    </select>
+  </section>
+
+  <section class="jobs">
+    <div class="job-card">
+      <h3>Senior UX Designer</h3>
+      <p>Google - Mountain View, CA</p>
+      <p>$120,000 - $150,000/year</p>
+      <a href="#" class="apply">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <h3>Software Engineer (Full Stack)</h3>
+      <p>Meta - Remote</p>
+      <p>$100,000 - $140,000/year</p>
+      <a href="#" class="apply">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <h3>Marketing Specialist</h3>
+      <p>Spotify - New York, NY</p>
+      <p>$80,000 - $100,000/year</p>
+      <a href="#" class="apply">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <h3>Data Scientist</h3>
+      <p>Netflix - Los Gatos, CA</p>
+      <p>$130,000 - $160,000/year</p>
+      <a href="#" class="apply">Apply Now</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 JobRinger. Built with inspiration from top job platforms. All rights reserved.
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.toggle('active');
+    }
+  </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobRinger Clone - Modern Redesign</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>JobRinger</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav>
+      <a href="#">Jobs</a>
+      <a href="#">Active Employers</a>
+      <a href="#">Job Blogs</a>
+      <a href="#">Pricing</a>
+      <button class="login-btn">Jobseeker Login</button>
+      <button class="login-btn">Employer Login</button>
+    </nav>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#">Jobs</a>
+      <a href="#">Active Employers</a>
+      <a href="#">Job Blogs</a>
+      <a href="#">Pricing</a>
+      <button class="login-btn">Jobseeker Login</button>
+      <button class="login-btn">Employer Login</button>
+    </div>
+  </header>
+
+  <section class="employer-offer">
+  <div class="offer-content">
+    <h3>EMPLOYERS</h3>
+    <p><strong>WELCOME OFFER - FREE JOB</strong> Postings and Much More.</p>
+  </div>
+  <div class="offer-actions">
+    <button class="btn yellow">Register for FREE</button>
+    <button class="btn white">Post A Job</button>
+    <a href="#" class="sales-link">Sales Enquiry</a>
+  </div>
+</section>
+
+
+  <section class="hero">
+    <h2>Bringing you the Perfect Job !</h2>
+    <p>Search millions of job listings from top employers and find a career path that fits your life and ambitions.</p>
+    <p>11,000+ JOBS to Apply</p>
+  </section>
+
+  <section class="filters">
+    <input type="text" placeholder="Search Jobs Now">
+    <select>
+      <option>Location</option>
+      <option>Remote</option>
+      <option>India</option>
+      <option>New York</option>
+      <option>California</option>
+    </select>
+    <select>
+      <option>Category</option>
+      <option>Engineering</option>
+      <option>Marketing</option>
+      <option>Finance</option>
+    </select>
+  </section>
+
+  <section class="hero1">
+    <button class="cta">Start Searching</button>
+  </section>
+
+  <section class="jobs">
+    <div class="job-card">
+      <h3>Senior UX Designer</h3>
+      <p>Google - Mountain View, CA</p>
+      <p>$120,000 - $150,000/year</p>
+      <a href="#" class="apply">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <h3>Software Engineer (Full Stack)</h3>
+      <p>Meta - Remote</p>
+      <p>$100,000 - $140,000/year</p>
+      <a href="#" class="apply">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <h3>Marketing Specialist</h3>
+      <p>Spotify - New York, NY</p>
+      <p>$80,000 - $100,000/year</p>
+      <a href="#" class="apply">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <h3>Data Scientist</h3>
+      <p>Netflix - Los Gatos, CA</p>
+      <p>$130,000 - $160,000/year</p>
+      <a href="#" class="apply">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <h3>Solution Consulting</h3>
+      <p>Intellect Design Arena Ltd. - Pune, India</p>
+      <p>$130,0 - $160,0/year</p>
+      <a href="#" class="apply">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <h3>Assistant manager</h3>
+      <p>Indics Solution - Mumbai, India</p>
+      <p>$70,000 - $100,00/year</p>
+      <a href="#" class="apply">Apply Now</a>
+    </div>
+  </section>
+
+  <div class="pagination">
+    <button class="page-btn">« Prev</button>
+    <button class="page-btn active">1</button>
+    <button class="page-btn">2</button>
+    <button class="page-btn">3</button>
+    <button class="page-btn">Next »</button>
+  </div>
+
+  <section class="featured-employers">
+  <h2>Featured Employers</h2>
+  <p>Trusted by top companies around the world</p>
+  <div class="employer-logos">
+    <img src="https://humanli.ai/wp-content/uploads/2023/12/image-removebg-preview-1-1.png" alt="Google">
+    <img src="https://edatabae.com/assets/images/image01.png?v=13f32393" alt="Meta">
+    <img src="https://boardroomcxo.com/wp-content/uploads/2025/04/LOGO-1536x658.png" alt="Spotify">
+    <img src="https://www.varmoda.com/images/logo.png" alt="Netflix">
+    <img src="https://www.lotusinterworks.com/images/Lotus-interworks-logo.svg" alt="Intellect Design Arena">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM">
+    <img src="https://www.akratijewelsinc.com/web-assets/images/logo.png" alt="Accenture">
+    <img src="https://www.trymintly.com/_next/image?url=%2Fstatic%2Fimages%2Fmintly.webp&w=640&q=75" alt="Apple">
+  </div>
+</section>
+
+
+  <section class="mobile-app-promo">
+  <div class="app-content">
+    <div class="text-content">
+      <h2>Apply to Jobs On-the-Go</h2>
+      <p>Download the JobRinger Mobile App from the Play Store and stay connected to the best job opportunities anytime, anywhere.</p>
+      <a href="https://play.google.com/store" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png" alt="Get it on Google Play" class="store-badge">
+      </a>
+    </div>
+    <div class="image-content">
+      <img src="app.jpg" alt="Mobile App Preview" class="mobile-image">
+    </div>
+  </div>
+</section>
+
+
+  <section class="location-jobs">
+  <div class="jobs-section">
+    <h2>Jobs in India</h2>
+    <div class="location-tags">
+      <span>#Mumbai</span>
+      <span>#Delhi</span>
+      <span>#Ajmer</span>
+      <span>#Pune</span>
+      <span>#Hyderabad</span>
+      <span>#Agra</span>
+      <span>#Chennai</span>
+      <span>#Kolkata</span>
+      <span>#Indore</span>
+      <span>#Gurugram</span>
+      <span>#Jaipur</span>
+      <span>#Ahmedabad</span>
+    </div>
+  </div>
+
+  <div class="jobs-section">
+    <h2>International Jobs</h2>
+    <div class="location-tags">
+      <span>#Africa</span>
+      <span>#USA</span>
+      <span>#UK</span>
+      <span>#Australia</span>
+      <span>#Canada</span>
+      <span>#Singapore</span>
+      <span>#Dubai</span>
+      <span>#Saudi Arabia</span>
+      <span>#New Zealand</span>
+    </div>
+  </div>
+</section>
+
+
+  <section class="job-stats">
+  <div class="stats-container">
+    <div class="stat-box">
+      <h3>Jobs Posted</h3>
+      <p>40,927</p>
+    </div>
+    <div class="stat-box">
+      <h3>Jobs Filled</h3>
+      <p>15,153</p>
+    </div>
+    <div class="stat-box">
+      <h3>Employers</h3>
+      <p>25,781</p>
+    </div>
+    <div class="stat-box">
+      <h3>Active Users</h3>
+      <p>1,560,712</p>
+    </div>
+  </div>
+</section>
+
+<section class="disclaimer">
+  <div class="disclaimer-content">
+    <h3>Disclaimer</h3>
+    <p>
+      All Trademarks and Logos are the property of their respective owners, depicted here purely for representation purpose.
+       | Jobringer.com has taken all reasonable steps to ensure that information on this site is genuine. Job Applicants are advised to evaluate independently. 
+       Jobringer.com shall not have any responsibility in this regard. All Jobseeker services are strictly designed & meant only for job search assistance and
+        to maximize the chances for the jobseekers to get their dream job. All Job Seeker Credentials and Employment Opportunities are subject to individual merit & evaluation. We do not
+         guarantee any job to any jobseeker.
+    </p>
+  </div>
+</section>
+
+  <footer>
+    &copy; 2025 JobRinger. Built with inspiration from top job platforms. All rights reserved.
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
